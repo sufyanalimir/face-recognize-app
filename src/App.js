@@ -13,8 +13,30 @@ class App extends Component {
     this.state = {
       input: "",
       imageUrl: "",
+      box: {},
     };
   }
+
+  calculateFaceLocation = (data) => {
+    const clarifai_face = data;
+    const input_img = document.getElementById("inputImg");
+    const img_width = Number(input_img.width);
+    const img_height = Number(input_img.height);
+
+    return {
+      leftCol: clarifai_face.left_col * img_width,
+      topRow: clarifai_face.top_row * img_height,
+      rightCol: img_width - clarifai_face.right_col * img_width,
+      bottomRow: img_height - clarifai_face.bottom_row * img_height,
+    };
+  };
+
+  displayBox = (box) => {
+    console.log(box);
+    this.setState({ box: box });
+    console.log(box);
+  };
+
   onInputChange = (event) => {
     this.setState({ input: event.target.value });
   };
@@ -60,11 +82,21 @@ class App extends Component {
     )
       .then((response) => response.json())
       .then((result) => {
-        result.outputs.forEach((output) => {
-          output.data.regions.forEach((region) => {
-            console.log(region.region_info.bounding_box);
+        if (result.outputs.length == 1) {
+          this.displayBox(
+            this.calculateFaceLocation(
+              result.outputs[0].data.regions[0].region_info.bounding_box
+            )
+          );
+        } else {
+          result.outputs.forEach((output) => {
+            output.data.regions.forEach((region) => {
+              this.displayBox(
+                this.calculateFaceLocation(region.region_info.bounding_box)
+              );
+            });
           });
-        });
+        }
       })
       .catch((error) => console.log("error", error));
   };
@@ -82,7 +114,7 @@ class App extends Component {
           onInputChange={this.onInputChange}
           onBtnSubmit={this.onBtnSubmit}
         />
-        <FaceRecognition imageUrl={this.state.imageUrl} />
+        <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl} />
       </div>
     );
   }
