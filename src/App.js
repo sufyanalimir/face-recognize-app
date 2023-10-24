@@ -3,6 +3,7 @@ import Navigation from "./components/Navigation";
 import Logo from "./components/Logo";
 import InputForm from "./components/InputForm";
 import Rank from "./components/Rank";
+import FaceRecognition from "./components/FaceRecognition";
 import ParticlesBg from "particles-bg";
 import { Component } from "react";
 
@@ -11,10 +12,10 @@ class App extends Component {
     super();
     this.state = {
       input: "",
+      imageUrl: "",
     };
   }
   onInputChange = (event) => {
-    // console.log(event.target.value);
     this.setState({ input: event.target.value });
   };
 
@@ -52,12 +53,19 @@ class App extends Component {
   };
 
   onBtnSubmit = () => {
-    console.log(this.state.input);
+    this.setState({ imageUrl: this.state.input });
     fetch(
       "https://api.clarifai.com/v2/models/face-detection/outputs",
       this.returnClarifaiRequestOptions(this.state.input)
     )
-      .then((response) => console.log(response))
+      .then((response) => response.json())
+      .then((result) => {
+        result.outputs.forEach((output) => {
+          output.data.regions.forEach((region) => {
+            console.log(region.region_info.bounding_box);
+          });
+        });
+      })
       .catch((error) => console.log("error", error));
   };
 
@@ -74,6 +82,7 @@ class App extends Component {
           onInputChange={this.onInputChange}
           onBtnSubmit={this.onBtnSubmit}
         />
+        <FaceRecognition imageUrl={this.state.imageUrl} />
       </div>
     );
   }
