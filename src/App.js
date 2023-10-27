@@ -6,6 +6,7 @@ import Rank from "./components/Rank/Rank";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import ParticlesBg from "particles-bg";
 import { Component } from "react";
+import SignIn from "./components/SignIn/SignIn";
 
 class App extends Component {
   constructor() {
@@ -109,6 +110,7 @@ class App extends Component {
           <Logo />
           <Navigation />
         </div>
+        <SignIn />
         <Rank />
         <InputForm
           onInputChange={this.onInputChange}
