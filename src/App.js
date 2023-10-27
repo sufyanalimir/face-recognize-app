@@ -1,9 +1,9 @@
 import "./App.css";
-import Navigation from "./components/Navigation";
-import Logo from "./components/Logo";
-import InputForm from "./components/InputForm";
-import Rank from "./components/Rank";
-import FaceRecognition from "./components/FaceRecognition";
+import Navigation from "./components/Navigation/Navigation";
+import Logo from "./components/Logo/Logo";
+import InputForm from "./components/InputForm/InputForm";
+import Rank from "./components/Rank/Rank";
+import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import ParticlesBg from "particles-bg";
 import { Component } from "react";
 
@@ -109,7 +109,7 @@ class App extends Component {
           <Logo />
           <Navigation />
         </div>
-        <Rank test={this.test} />
+        <Rank />
         <InputForm
           onInputChange={this.onInputChange}
           onBtnSubmit={this.onBtnSubmit}
