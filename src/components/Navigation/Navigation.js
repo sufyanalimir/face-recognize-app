@@ -1,9 +1,14 @@
 import React from "react";
 
-const Navigation = () => {
+const Navigation = ({ onRouteChange }) => {
   return (
     <nav>
-      <p className="f3 link dim underline pointer">Sign out</p>
+      <p
+        className="f3 link dim underline pointer"
+        onClick={() => onRouteChange("signin")}
+      >
+        Sign out
+      </p>
     </nav>
   );
 };

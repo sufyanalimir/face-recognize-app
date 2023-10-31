@@ -15,6 +15,7 @@ class App extends Component {
       input: "",
       imageUrl: "",
       box: {},
+      route: "signin",
     };
   }
 
@@ -102,21 +103,33 @@ class App extends Component {
       .catch((error) => console.log("error", error));
   };
 
+  onRouteChange = (route) => {
+    this.setState({ route: route });
+  };
+
   render() {
     return (
       <div className="App">
         <ParticlesBg color="#333333" num={60} type="cobweb" bg={true} />
         <div className="flex justify-between pa3">
           <Logo />
-          <Navigation />
+          <Navigation onRouteChange={this.onRouteChange} />
         </div>
-        <SignIn />
-        <Rank />
-        <InputForm
-          onInputChange={this.onInputChange}
-          onBtnSubmit={this.onBtnSubmit}
-        />
-        <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl} />
+        {this.state.route === "signin" ? (
+          <SignIn onRouteChange={this.onRouteChange} />
+        ) : (
+          <>
+            <Rank />
+            <InputForm
+              onInputChange={this.onInputChange}
+              onBtnSubmit={this.onBtnSubmit}
+            />
+            <FaceRecognition
+              box={this.state.box}
+              imageUrl={this.state.imageUrl}
+            />
+          </>
+        )}
       </div>
     );
   }
