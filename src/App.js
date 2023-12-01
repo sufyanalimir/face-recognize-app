@@ -127,7 +127,7 @@ class App extends Component {
         </div>
         {this.state.route === "home" ? (
           <>
-            <Rank />
+            {/* <Rank /> */}
             <InputForm
               onInputChange={this.onInputChange}
               onBtnSubmit={this.onBtnSubmit}

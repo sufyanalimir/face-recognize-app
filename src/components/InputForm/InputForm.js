@@ -11,6 +11,7 @@ const InputForm = ({ onInputChange, onBtnSubmit }) => {
             type="text"
             className="f4 pa2 w-70 center"
             onChange={onInputChange}
+            placeholder="Enter image url"
           />
           <button
             className="w-30 ml2 grow f4 link ph3 pv2 dib white bg-dark-gray"
