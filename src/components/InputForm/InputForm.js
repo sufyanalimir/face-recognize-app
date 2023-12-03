@@ -2,11 +2,11 @@ import React from "react";
 const InputForm = ({ onInputChange, onBtnSubmit }) => {
   return (
     <>
-      <p className="f3 center">
+      <p className="sub-heading">
         {"This magic brain will detect faces in your pictures."}
       </p>
       <div className="center">
-        <div className="form center">
+        <div className="center form">
           <input
             type="text"
             className="f4 pa2 w-70 center"

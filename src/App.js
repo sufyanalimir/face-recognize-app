@@ -1,21 +1,15 @@
 import "./App.css";
-// import Navigation from "./components/Navigation/Navigation";
 import Logo from "./components/Logo/Logo";
 import InputForm from "./components/InputForm/InputForm";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
-// import Register from "./components/Register/Register";
+
 import ParticlesBg from "particles-bg";
 import { useState } from "react";
-// import SignIn from "./components/SignIn/SignIn";
 
 function App() {
   const [input, setInput] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [boxArray, setBoxArray] = useState([]);
-  // const [route, setRoute] = useState("signin");
-  // const [isSignedIn, setIsSignedIn] = useState(false);
-
-  console.log(boxArray);
 
   const calculateFaceLocation = (data) => {
     const clarifai_face = data;
@@ -86,35 +80,14 @@ function App() {
       .catch((error) => console.log("error", error));
   };
 
-  // const onRouteChange = (route) => {
-  //   if (route === "signout") {
-  //     setIsSignedIn(false);
-  //   } else if (route === "home") {
-  //     setIsSignedIn(true);
-  //   }
-  //   setRoute(route);
-  // };
-
   return (
     <div className="App">
       <ParticlesBg color="#333333" num={60} type="cobweb" bg={true} />
-      <div className="flex justify-between pa3">
+      <div className="nav-container">
         <Logo />
-        {/* <Navigation onRouteChange={onRouteChange} isSignedIn={isSignedIn} /> */}
       </div>
       <InputForm onInputChange={onInputChange} onBtnSubmit={onBtnSubmit} />
       <FaceRecognition boxArray={boxArray} imageUrl={imageUrl} />
-
-      {/* {route === "home" ? (
-        <>
-          <InputForm onInputChange={onInputChange} onBtnSubmit={onBtnSubmit} />
-          <FaceRecognition boxArray={boxArray} imageUrl={imageUrl} />
-        </>
-      ) : route === "register" ? (
-        <Register onRouteChange={onRouteChange} />
-      ) : (
-        <SignIn onRouteChange={onRouteChange} />
-      )} */}
     </div>
   );
 }

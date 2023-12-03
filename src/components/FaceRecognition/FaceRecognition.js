@@ -2,11 +2,12 @@ import React from "react";
 
 const FaceRecognition = ({ imageUrl, boxArray }) => {
   return (
-    <div className="center ma3">
-      <div className="absolute mt2" style={{ top: 285 }}>
+    <div className="center">
+      <div className="img-container">
         <img id="inputImg" src={imageUrl} alt="" />
-        {boxArray.map((box) => (
+        {boxArray.map((box, index) => (
           <div
+            key={index}
             className="bounding_box"
             style={{
               top: box.topRow,
